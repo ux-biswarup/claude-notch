@@ -1,0 +1,64 @@
+[workspace]
+members = ["core"]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+authors = ["Biswarup Mondal"]
+
+[workspace.dependencies]
+serde = { version = "1", features = ["derive"] }
+# preserve_order: we rewrite the user's ~/.claude/settings.json and must not reorder their keys
+serde_json = { version = "1", features = ["preserve_order"] }
+thiserror = "2"
+
+[package]
+name = "claude-notch"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+description = "Ambient Windows overlay that tells you when Claude Code is working, waiting, finished, or needs attention."
+
+[lib]
+name = "claude_notch_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+claude-notch-core = { path = "core" }
+
+tauri = { version = "2", features = ["tray-icon", "image-png", "image-ico"] }
+tauri-plugin-single-instance = "2"
+tauri-plugin-autostart = "2"
+tauri-plugin-notification = "2"
+
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+log = "0.4"
+env_logger = "0.11"
+
+# Usage endpoint. native-tls = Schannel on Windows (no C toolchain, no bundled CA store);
+# system-proxy honours corporate proxies.
+reqwest = { version = "0.13", default-features = false, features = ["json", "native-tls", "system-proxy"] }
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "time", "net", "io-util", "fs"] }
+
+# Win32: window enumeration + foregrounding for "Open Claude Code" (PRD §9, phase 5).
+# 0.61 matches the version tauri 2.11 already pulls in, so it compiles once.
+windows = { version = "0.61", features = [
+  "Win32_Foundation",
+  "Win32_UI_WindowsAndMessaging",
+  "Win32_UI_Input_KeyboardAndMouse",
+] }
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "s"
+panic = "abort"
+strip = true

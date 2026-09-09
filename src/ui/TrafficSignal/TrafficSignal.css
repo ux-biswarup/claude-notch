@@ -1,0 +1,134 @@
+.signal-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.signal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 9px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.signal:hover {
+  transform: translateY(-1px);
+}
+
+.signal:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.light {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--light-off);
+  transition:
+    background-color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.35s ease;
+}
+
+/* Exactly one light is lit; colour follows data-state on the button */
+.signal[data-state="working"] .light--working {
+  background: var(--light-working);
+  box-shadow: 0 0 10px 1px color-mix(in srgb, var(--light-working) 70%, transparent);
+}
+
+.signal[data-state="waiting"] .light--waiting {
+  background: var(--light-waiting);
+  box-shadow: 0 0 10px 1px color-mix(in srgb, var(--light-waiting) 70%, transparent);
+}
+
+.signal[data-state="done"] .light--done {
+  background: var(--light-done);
+  box-shadow: 0 0 10px 1px color-mix(in srgb, var(--light-done) 60%, transparent);
+}
+
+.signal[data-state="error"] .light--error {
+  background: var(--light-error);
+  box-shadow: 0 0 10px 1px color-mix(in srgb, var(--light-error) 70%, transparent);
+}
+
+/* Click card (PRD §9) */
+.signal-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 188px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--bg-elevated);
+}
+
+.signal-card__title {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.signal-card__state {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.signal-card__state::before {
+  content: "";
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--light-off);
+}
+
+.signal-card__state[data-state="working"]::before { background: var(--light-working); }
+.signal-card__state[data-state="waiting"]::before { background: var(--light-waiting); }
+.signal-card__state[data-state="done"]::before { background: var(--light-done); }
+.signal-card__state[data-state="error"]::before { background: var(--light-error); }
+
+.signal-card__meta {
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.signal-card__action {
+  margin-top: 6px;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  text-align: left;
+  cursor: pointer;
+}
+
+.signal-card__action:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.signal-card__action:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.signal-card__note {
+  font-size: 11px;
+  color: var(--usage-warn);
+}
+
+.signal-card__note:empty {
+  display: none;
+}

@@ -1,0 +1,73 @@
+.usage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  min-width: 108px;
+  padding: 8px 14px 9px;
+}
+
+.usage__label {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.usage__row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ring {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  transform: rotate(-90deg);
+}
+
+.ring circle {
+  fill: none;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+
+.ring__track {
+  stroke: rgba(255, 255, 255, 0.1);
+}
+
+.ring__value {
+  stroke: var(--usage-ok);
+  transition: stroke-dashoffset 0.6s ease, stroke 0.3s ease;
+}
+
+.usage[data-tone="warn"] .ring__value { stroke: var(--usage-warn); }
+.usage[data-tone="high"] .ring__value { stroke: var(--usage-high); }
+.usage[data-tone="stale"] .ring__value { stroke: var(--usage-stale); }
+.usage[data-tone="off"] .ring__value { stroke: transparent; }
+
+.usage__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.usage__primary {
+  font-size: 14px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.usage[data-tone="stale"] .usage__primary,
+.usage[data-tone="off"] .usage__primary {
+  color: var(--muted);
+}
+
+.usage__secondary {
+  font-size: 10.5px;
+  color: var(--muted);
+  white-space: nowrap;
+}

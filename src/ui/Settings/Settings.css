@@ -1,0 +1,98 @@
+.settings {
+  width: 236px;
+  padding: 10px 12px 12px;
+  border-radius: 12px;
+  background: var(--bg-elevated);
+}
+
+.settings__form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.settings__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.settings__title {
+  font-weight: 600;
+}
+
+.settings__close {
+  width: 22px;
+  height: 22px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.settings__close:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.settings fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 6px 8px 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.settings legend {
+  padding: 0 4px;
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.settings label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.settings label small {
+  color: var(--muted);
+}
+
+.settings select {
+  margin-left: auto;
+  font: inherit;
+  color: inherit;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 2px 4px;
+}
+
+.settings__hooks {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.settings__connect {
+  align-self: flex-start;
+  padding: 5px 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+}
+
+.settings__connect:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.settings__connect:disabled {
+  opacity: 0.5;
+  cursor: default;
+}

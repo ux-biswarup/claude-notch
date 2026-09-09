@@ -1,0 +1,113 @@
+/* Design tokens — see docs/ux.md */
+:root {
+  color-scheme: dark;
+
+  --bg: rgba(20, 20, 24, 0.92);
+  --bg-elevated: rgba(32, 32, 38, 0.96);
+  --border: rgba(255, 255, 255, 0.08);
+  --fg: #ececef;
+  --muted: #9a9aa3;
+  --accent: #d97757;
+
+  /* Traffic-signal lights (PRD §6.2) */
+  --light-working: #34d399; /* green  */
+  --light-waiting: #f5a524; /* amber  */
+  --light-done: #f4f4f5;    /* white  */
+  --light-error: #f43f5e;   /* red    */
+  --light-off: rgba(255, 255, 255, 0.12);
+
+  /* Usage ring tones */
+  --usage-ok: #34d399;
+  --usage-warn: #f5a524;
+  --usage-high: #f43f5e;
+  --usage-stale: #9a9aa3;
+
+  --radius: 16px;
+  --shadow: 0 6px 20px rgba(0, 0, 0, 0.35), 0 1px 2px rgba(0, 0, 0, 0.4);
+  --font: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  /* Motion timings (PRD §8) */
+  --dur-breathe: 3.2s;
+  --dur-pulse: 2.4s;
+  --dur-pop: 0.7s;
+  --dur-double: 1s;
+  --dur-enter: 0.6s;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: transparent;
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font);
+  font-size: 12px;
+  line-height: 1.3;
+  color: var(--fg);
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+#app {
+  display: flex;
+  justify-content: flex-end;
+  padding: 12px;
+}
+
+.notch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: max-content;
+}
+
+.surface {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+}
+
+/* Reduced motion: system preference (unless the user forced it off) or explicit setting */
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-reduced-motion="off"]) * {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+:root[data-reduced-motion="on"] * {
+  animation: none !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* Browser preview only: the real window is transparent over the desktop */
+:root[data-backend="browser"] body {
+  min-height: 100vh;
+  background: #26282e radial-gradient(circle at 30% 20%, #3a3d46, #1c1d22);
+}
+
+:root[data-backend="browser"] #app::after {
+  content: "Browser preview · → next step · d demo · s settings";
+  position: fixed;
+  left: 12px;
+  bottom: 10px;
+  font-size: 11px;
+  color: var(--muted);
+}

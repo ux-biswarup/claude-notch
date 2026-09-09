@@ -1,0 +1,12 @@
+[package]
+name = "claude-notch-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+description = "Provider abstractions, Claude Code hook parsing and the activity state machine for Claude Notch. No UI, no Tauri, no Win32."
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
